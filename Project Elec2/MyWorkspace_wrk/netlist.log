@@ -1,0 +1,73 @@
+; Top Design: "MyLibrary_lib:cell_1:schematic"
+; Netlisted using Hierarchy Policy: "Standard"
+
+Options ResourceUsage=yes UseNutmegFormat=no EnableOptim=no TopDesignName="MyLibrary_lib:cell_1:schematic" DcopOutputNodeVoltages=yes DcopOutputPinCurrents=yes DcopOutputAllSweepPoints=no DcopOutputDcopType=0
+model BJTM1 BJT NPN=0 PNP=1 Is=80 fA Bf=50 Vaf=30 Lateral=0 RbModel=0 Approxqb=1 
+model BJTM2 BJT NPN=1 PNP=0 Is=5 fA Bf=200 Vaf=100 Lateral=0 RbModel=0 Approxqb=1 
+"BJTM1":BJT1  N__1 N__1 N__33 Mode=1 Noise=no 
+V_Source:SRC4  N__23 0 Type="V_DC" Vdc=-10 V SaveCurrent=1 
+"BJTM2":BJT2  N__6 N__6 N__23 Mode=1 Noise=no 
+"BJTM2":BJT3  N__19 N__6 N__23 Mode=1 Noise=no 
+R:R1  N__1 N__6 R=3.8 MOhm Noise=yes 
+V_Source:SRC5  N__33 0 Type="V_DC" Vdc=10 V SaveCurrent=1 
+"BJTM2":BJT4  N__3 N__7 N__19 Mode=1 Noise=no 
+"BJTM2":BJT8  N__18 N__20 N__19 Mode=1 Noise=no 
+R:R2  N__7 Vin R=100 kOhm Noise=yes 
+R:R3  N__14 N__20 R=100 kOhm Noise=yes 
+"BJTM2":BJT6  N__22 N__13 N__3 Mode=1 Noise=no 
+"BJTM2":BJT7  N__27 N__13 N__18 Mode=1 Noise=no 
+R:R4  N__33 N__13 R=0.8 MOhm Noise=yes 
+R:R5  N__13 N__23 R=3.2 MOhm Noise=yes 
+"BJTM1":BJT9  N__8 N__8 N__33 Mode=1 Noise=no 
+"BJTM1":BJT10  N__2 N__8 N__33 Mode=1 Noise=no 
+"BJTM1":BJT11  N__22 N__27 N__2 Mode=1 Noise=no 
+"BJTM1":BJT12  N__27 N__27 N__8 Mode=1 Noise=no 
+"BJTM2":BJT13  N__21 N__21 N__23 Mode=1 Noise=no 
+R:R6  N__12 N__21 R=16 MOhm Noise=yes 
+"BJTM1":BJT14  N__12 N__12 N__33 Mode=1 Noise=no 
+"BJTM1":BJT15  N__4 N__12 N__33 Mode=1 Noise=no 
+"BJTM1":BJT16  N__23 N__22 N__4 Mode=1 Noise=no 
+"BJTM1":BJT17  N__11 N__4 N__33 Mode=1 Noise=no 
+"BJTM2":BJT18  N__26 N__26 N__23 Mode=1 Noise=no 
+"BJTM2":BJT19  N__11 N__26 N__23 Mode=1 Noise=no 
+"BJTM1":BJT20  N__10 N__10 N__33 Mode=1 Noise=no 
+R:R7  N__10 N__26 R=420 kOhm Noise=yes 
+"BJTM1":BJT21  N__23 N__11 N__25 Mode=1 Noise=no 
+"BJTM2":BJT22  N__16 N__16 N__25 Mode=1 Noise=no 
+"BJTM2":BJT23  N__32 N__32 N__16 Mode=1 Noise=no 
+"BJTM1":BJT24  N__23 N__25 Vout Mode=1 Noise=no 
+"BJTM2":BJT25  N__33 N__32 Vout Mode=1 Noise=no 
+"BJTM1":BJT26  N__32 N__5 N__33 Mode=1 Noise=no 
+R:R8  Vout 0 R=1 kOhm Noise=yes 
+V_Source:SRC6  Vin 0 Type="VtSine" V[1]=if (_tr_state == 0) then (10 mV)*exp(j*2*pi*((0)/360-(0 nsec)*(1 kHz)-.25)-(time-(0 nsec))*(0))*step((time-(0 nsec))+tinyreal) else 0 endif Freq[1]=1 kHz Vdc=0 V V_Tran=if (_tr_state == 1) then damped_sin(time,0,10 mV,1 kHz,max(0,0 nsec),0,0) else (10 mV)*step(((0 nsec)-time)-tinyreal)*sin(pi*(0)/180) endif SaveCurrent=1 
+C:C1  N__14 0 C=1.0 uF 
+L:L1  Vout N__14 L=1.0 uH Noise=yes  
+Tran:Tran1 StartTime=0.0 msec StopTime=5 msec MaxTimeStep=10 usec LimitStepForTL=yes TimeStepControl=2 TruncTol=7.0 ChargeTol=1.0e-14 IntegMethod=0 MaxGearOrder=2 \
+Mu=0.5 MaxOrder=4 Freq[1]=1.0 GHz Order[1]=3 HB_Window=no \
+HB_Sol=no ImpApprox=no ShortTL_Delay=1.0 psec ImpMode=1 UseInitCond=no \
+LoadGminDC=no CheckKCL=yes CheckOnlyDeltaV=yes OverloadAlert=no DeviceBypass=no \
+MaxIters=10 MaxItersDC=200 DevOpPtLevel=0 StatusLevel=2 OutputAllPoints=yes \
+NoiseScale=1 ImpEnforcePassivity=yes \
+OutputPlan="Tran1_Output" 
+
+OutputPlan:Tran1_Output \
+      Type="Output" \
+      UseNodeNestLevel=yes \
+      NodeNestLevel=2 \
+      UseEquationNestLevel=yes \
+      EquationNestLevel=2 \
+      UseSavedEquationNestLevel=yes \
+      SavedEquationNestLevel=2 \
+      UseDeviceCurrentNestLevel=no \
+      DeviceCurrentNestLevel=0 \
+      DeviceCurrentDeviceType="All" \
+      DeviceCurrentSymSyntax=yes \
+      UseCurrentNestLevel=yes \
+      CurrentNestLevel=999 \
+      UseDeviceVoltageNestLevel=no \
+      DeviceVoltageNestLevel=0 \
+      DeviceVoltageDeviceType="All"
+
+"BJTM1":BJT27  N__5 N__5 N__33 Mode=1 Noise=no 
+"BJTM2":BJT28  N__9 N__9 N__23 Mode=1 Noise=no 
+R:R9  N__5 N__9 R=0.82 MOhm Noise=yes 
